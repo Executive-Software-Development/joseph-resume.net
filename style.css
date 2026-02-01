@@ -1,0 +1,483 @@
+:root {
+    --primary: #1a1a1a;
+    --accent: #3b82f6;
+    --bg: #ffffff;
+    --gray: #f4f4f7;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+html,
+body {
+    background: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* Resume Paper Setup */
+/* 1. Force the page to wrap all content without letting it bleed out */
+.resume-page {
+    width: 210mm;
+    /* let content determine page height on screen/print instead of forcing a fixed mm height */
+    min-height: auto;
+    height: auto !important;
+    background: var(--bg);
+    position: relative;
+    display: flex;
+    /* Stack sections vertically */
+    flex-direction: column;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+}
+
+/* Unique Shapes */
+.shape-blob {
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 300px;
+    height: 300px;
+    background: var(--accent);
+    clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
+    opacity: 0.1;
+    z-index: 0;
+}
+
+header {
+    background: var(--primary);
+    color: white;
+    padding: 50px;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+}
+
+header h1 {
+    font-size: 3rem;
+    letter-spacing: -1px;
+}
+
+.thin {
+    font-weight: 200;
+    color: var(--accent);
+}
+
+.tagline {
+    margin-top: 10px;
+    font-size: 1.1rem;
+    color: #ccc;
+}
+
+/* Grid Layout */
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 40px;
+    padding: 40px;
+}
+
+/* Sidebar spacing: make contact and subsequent boxes consistently padded for better UX */
+.sidebar > div, .sidebar .contact-box, .sidebar .skills-box, .sidebar .potential-box, .sidebar .languages-box {
+    padding: 12px 20px;
+    box-sizing: border-box;
+}
+
+.sidebar .contact-box p,
+.sidebar .skills-box p,
+.sidebar .potential-box p,
+.sidebar .languages-box p {
+    margin-bottom: 8px;
+}
+
+.contact-box > p {
+    font-size: .75rem;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+h3 {
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--gray);
+    padding-bottom: 5px;
+}
+
+.pill {
+    background: var(--gray);
+    padding: 5px 12px;
+    border-radius: 20px;
+    display: inline-block;
+    margin: 3px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.job {
+    margin-bottom: 25px;
+}
+
+.job-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+.role {
+    font-style: italic;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+ul {
+    padding-left: 18px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #333;
+}
+
+blockquote {
+    border-left: 4px solid var(--accent);
+    padding-left: 20px;
+    font-style: italic;
+    color: #444;
+    margin-top: 20px;
+}
+
+/* 2. Ensure the projects section stays inside the horizontal padding */
+.projects-section {
+    width: 100%;
+    margin-top: 20px;
+    padding: 0 40px 40px 40px;
+    box-sizing: border-box;
+    /* Crucial: includes padding in width calculation */
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Two equal columns */
+    gap: 15px;
+    width: 100%;
+}
+
+.project-card {
+    border: 1px solid var(--gray);
+    padding: 15px;
+    position: relative;
+}
+
+/* Keyword helper for emphasis */
+.kw { font-weight: 800; }
+
+.project-tag {
+    font-size: 0.6rem;
+    font-weight: 800;
+    color: white;
+    background: var(--primary);
+    display: inline-block;
+    padding: 2px 8px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.project-card h4 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: var(--primary);
+}
+
+.project-card p {
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: #666;
+}
+
+#download-btn {
+    padding: 5px;
+    border-radius: 20px;
+}
+
+/* Fix the spelling in your header class if you haven't yet */
+/* 4. Fix the tagline spelling and alignment */
+.tagline {
+    margin-top: 10px;
+    font-size: 1.1rem;
+    color: #ccc;
+    text-transform: none;
+    /* Keep it looking professional */
+}
+
+/* Consolidated print rules */
+@page {
+    margin: 0;
+}
+
+@media print {
+    @page {
+        size: auto;
+        /* auto is the initial value */
+        margin: 0;
+        /* This removes the default browser margins */
+    }
+
+    /* hide UI controls */
+    #download-btn {
+        display: none !important;
+    }
+
+    /* base reset and color-adjust for print */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Inter', sans-serif;
+    }
+
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        background: none !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        color-adjust: exact;
+    }
+
+    /* Main page container */
+    .resume-page {
+        box-shadow: none;
+        background: var(--bg);
+        width:100%;
+        /* allow multi-page flow while keeping printable sizing */
+        min-height: auto;
+        height: auto !important;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        overflow: visible;
+        padding: 0;
+        /* remove outer padding for print */
+        padding-bottom: 20mm;
+    }
+
+    /* Decorative shape — allow color printing */
+    .shape-blob {
+        position: absolute;
+        top: -50px;
+        right: -50px;
+        width: 300px;
+        height: 300px;
+        background: var(--accent);
+        clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
+        opacity: 0.1;
+        z-index: 0;
+        -webkit-print-color-adjust: exact;
+    }
+
+    /* Header */
+    header {
+        background: var(--primary);
+        color: white;
+        padding: 50px;
+        clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        -webkit-print-color-adjust: exact;
+        /* Prevent header from being separated from following content when printing */
+        page-break-after: avoid;
+        break-after: avoid;
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    header h1 {
+        font-size: 3rem;
+        letter-spacing: -1px;
+    }
+
+    .thin {
+        font-weight: 200;
+        color: var(--accent);
+    }
+
+    .tagline {
+        margin-top: 10px;
+        font-size: 1.1rem;
+        color: #ccc;
+        text-transform: none;
+    }
+
+    /* Layout */
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 0;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 40px;
+        align-items: start; /* ensure columns align to top for print */
+    }
+
+    /* Ensure grid and main content are not forced onto a new page after header */
+    .grid-container,
+    .main-content {
+        page-break-before: avoid;
+        break-before: avoid;
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    /* Keep sidebar part of the main grid flow when printing */
+    .sidebar {
+        page-break-inside: avoid;
+        break-inside: avoid;
+        page-break-after: auto;
+        padding: 8px 12px; /* small internal padding for print readability */
+        box-sizing: border-box;
+    }
+
+    /* Typography & components */
+    h3 {
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 2px;
+        color: var(--accent);
+        margin-bottom: 15px;
+        border-bottom: 2px solid var(--gray);
+        padding-bottom: 5px;
+    }
+
+    .pill {
+        background: var(--gray);
+        padding: 5px 12px;
+        border-radius: 20px;
+        display: inline-block;
+        margin: 3px;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    .job {
+        margin-bottom: 25px;
+    }
+
+    .job-header {
+        display: flex;
+        justify-content: space-between;
+        font-weight: bold;
+    }
+
+    .role {
+        font-style: italic;
+        color: #555;
+        margin-bottom: 8px;
+    }
+
+    ul {
+        padding-left: 18px;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        color: #333;
+    }
+
+    blockquote {
+        border-left: 4px solid var(--accent);
+        padding-left: 20px;
+        font-style: italic;
+        color: #444;
+        margin-top: 20px;
+    }
+
+    .projects-section {
+        width: 100%;
+        margin-top: 20px;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .project-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        width: 100%;
+    }
+
+    .project-card {
+        border: 1px solid var(--gray);
+        padding: 15px;
+        position: relative;
+        clip-path: polygon(0 0, 100% 0, 100% 90%, 90% 100%, 0 100%);
+        background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+        page-break-inside: avoid;
+        break-inside: avoid;
+        margin-bottom: 10px;
+    }
+
+    .project-tag {
+        font-size: 0.6rem;
+        font-weight: 800;
+        color: white;
+        background: var(--primary);
+        display: inline-block;
+        padding: 2px 8px;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+    }
+
+    .project-card h4 {
+        font-size: 1rem;
+        margin-bottom: 5px;
+        color: var(--primary);
+    }
+
+    .project-card p {
+        font-size: 0.8rem;
+        line-height: 1.4;
+        color: #666;
+    }
+
+    /* Multi-page helpers */
+    .projects-section h3 {
+        break-after: avoid;
+        margin-top: 30px;
+    }
+
+    .project-card {
+        break-inside: avoid;
+        margin-bottom: 20px;
+    }
+
+    /* keep important blocks whole */
+    header,
+    .projects-section,
+    .grid-container,
+    .experience,
+    .main-content,
+    .sidebar,
+    .project-card,
+    .job,
+    .contact-box,
+    .skills-box,
+    .languages-box,
+    .project-grid {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    /* show link URLs in print */
+    a[href]:after {
+        content: " (" attr(href) ")";
+        font-size: 90%;
+    }
+}
